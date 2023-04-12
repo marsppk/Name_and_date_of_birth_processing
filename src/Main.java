@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class Main {
     public static String make_initials(String first_name, String second_name){
-        char first = first_name.charAt(0);
-        char second = second_name.charAt(0);
+        char first = first_name.toUpperCase().charAt(0);
+        char second = second_name.toUpperCase().charAt(0);
         return first + "." + second + ".";
     }
 
@@ -140,7 +140,12 @@ public class Main {
                         if (gender.equals("Incorrect")) {
                             JOptionPane.showMessageDialog(mainWindow, "Невозможно корректно определить пол!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(mainWindow, "Результат: " + input_data[0] + " " + make_initials(input_data[1], input_data[2]) + " " + gender + " " + age + " " + correct_end(calculate_age(date_now[0], input_data[3])));
+                            int start = 1;
+                            int end = input_data[0].length();
+                            char[] dst = new char[end - start];
+                            input_data[0].getChars(start, end, dst, 0);
+                            String first_name = new String(dst);
+                            JOptionPane.showMessageDialog(mainWindow, "Результат: " + input_data[0].toUpperCase().charAt(0) + first_name + " " + make_initials(input_data[1], input_data[2]) + " " + gender + " " + age + " " + correct_end(calculate_age(date_now[0], input_data[3])));
                         }
                     }
                 }
